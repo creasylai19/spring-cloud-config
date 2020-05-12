@@ -1,4 +1,4 @@
 config: 
   source: github
   datasource: 
-    max-connections: 200
+    max-connections: 250
