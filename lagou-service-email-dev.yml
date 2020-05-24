@@ -11,3 +11,11 @@ spring:
     username: creasylai_public@126.com
     password: ${email.auth.code}
     host: smtp.126.com
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
