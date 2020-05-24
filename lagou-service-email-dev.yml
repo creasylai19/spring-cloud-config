@@ -1,3 +1,5 @@
+server:
+  port: 8082
 spring:
   mail:
     properties:
@@ -7,5 +9,5 @@ spring:
           timeout: 3000
           writetimeout: 5000
     username: creasylai_public@126.com
-    password: ${email.auth_code}
+    password: ${email.auth.code}
     host: smtp.126.com
