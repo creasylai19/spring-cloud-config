@@ -10,3 +10,50 @@ management:
       show-details: always
     gateway:
       enabled: true
+spring:
+  cloud:
+    redis:
+      port: 6379
+      host: localhost
+    gateway:
+      filter:
+        request-rate-limiter:
+          deny-empty-key: false
+      routes:
+#        - id: path_route_user
+#          uri: lb://lagou-service-user
+#          predicates:
+#            - Path=/api/user/**
+#          filters:
+#            - StripPrefix=1
+        - id: path_route_code
+          uri: lb://lagou-service-code
+          predicates:
+            - Path=/api/code/**
+          filters:
+            - StripPrefix=1
+        - id: path_route_email
+          uri: lb://lagou-service-email
+          predicates:
+            - Path=/api/email/**
+          filters:
+            - StripPrefix=1
+        - id: register_ratelimiter_route
+          uri: lb://lagou-service-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 10
+                key-resolver: "#{@userKeyResolver}"
+gateway:
+  verify:
+    excludes:
+      - /api/user/register/
+      - /api/user/isRegistered/
+      - /api/user/login/
+      - /api/code/create/
