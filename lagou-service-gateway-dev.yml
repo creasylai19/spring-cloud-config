@@ -14,21 +14,21 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: path_route_user
-          uri: lb://lagou-service-user
-          predicates:
-          - Path=/api/user/**
-          filters:
-          - StripPrefix=1
+#        - id: path_route_user
+#          uri: lb://lagou-service-user
+#          predicates:
+#          - Path=/api/user/**
+#          filters:
+#          - StripPrefix=1
         - id: path_route_code
           uri: lb://lagou-service-code
           predicates:
-          - Path=/api/code/**
+            - Path=/api/code/**
           filters:
-          - StripPrefix=1
+            - StripPrefix=1
         - id: path_route_email
           uri: lb://lagou-service-email
           predicates:
-          - Path=/api/email/**
+            - Path=/api/email/**
           filters:
-          - StripPrefix=1
+            - StripPrefix=1
